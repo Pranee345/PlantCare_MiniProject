@@ -1,0 +1,244 @@
+/* Reset default browser styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #915e5e;
+    scroll-behavior: smooth;
+}
+
+/* Header Section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #004d40;
+    padding: 10px;
+    color: white;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo styling */
+.logo img {
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
+    border-radius: 50%; /* Circular logo */
+}
+
+/* Site name styling */
+.site-name {
+    font-size: 2rem;
+    font-weight: bolder;
+    color:rgb(255, 255, 225)
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #8bc34a;
+    border-radius: 5px;
+}
+
+/* Home Section */
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(to right, #e0f7fa, #004d40);
+    color: #004d40;
+}
+
+.home-content {
+    max-width: 600px;
+    margin-right: 2rem;
+    animation: fadeInLeft 1.5s;
+}
+
+.home-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.home-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #8bc34a;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #004d40;
+}
+
+/* About Section */
+#about {
+    padding: 5rem 2rem;
+    background-color: #e0f7fa;
+    color: #004d40;
+    text-align: center;
+}
+
+.about-points {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.point {
+    background-color: #f4f4f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1.5s; /* Animation for each point */
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 1.5s; /* Animation for the title */
+}
+
+/* Measures Section */
+#measures {
+    padding: 5rem 2rem;
+    background-color: #e0f7fa;
+    color: #004d40;
+    text-align: center;
+}
+
+.measures-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.measure-tile {
+    background-color: #f4f4f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.measure-tile img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+}
+
+.measure-tile:hover {
+    transform: scale(1.05);
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #004d40;
+    text-decoration: underline;
+}
+
+/* Contact Section */
+#contact {
+    padding: 30px 20px; /* Reduced padding */
+    background-color: #0c0c0c;
+    color: #8ea1a1;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 1.8rem; /* Smaller title size */
+    margin-bottom: 1rem;
+}
+
+#contact p {
+    font-size: 1rem; /* Smaller text size */
+    margin-bottom: 0.5rem; /* Reduce spacing between paragraphs */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #home {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-content {
+        margin-bottom: 2rem;
+    }
+
+    .measures-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-points {
+        flex-direction: column;
+    }
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1.5s;
+}
