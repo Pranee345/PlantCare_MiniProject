@@ -12,21 +12,21 @@
             <img src="Images/logo.png" alt="Profile">
             <h2>Welcome</h2>
         </div>
-        <form action="#">
+        <form id="login-form">
             <div class="input-group">
-                <select required>            
-                    <option value="value">Select Role</option>
+                <select id="role" required>
+                    <option value="" disabled selected>Select Role</option>
                     <option value="user"><b>USER</b></option>
                     <option value="ragpicker"><b>RAGPICKER</b></option>
                 </select>
-                <span class="icon">&#9662;</span> <!-- Dropdown arrow -->
+                <span class="icon">&#9662;</span>
             </div>
             <div class="input-group">
-                <input type="text" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Username" required>
                 <span class="icon">&#128100;</span>
             </div>
             <div class="input-group">
-                <input type="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password" required>
                 <span class="icon">&#128274;</span>
             </div>
             <div class="options">
@@ -35,7 +35,8 @@
             </div>
             <button type="submit">LOGIN</button>
         </form>
-        <footer>&copy; 2024 Portrait Login Form. All rights reserved | Design by  PLANETCARE</footer>
+        <footer>&copy; 2024 Portrait Login Form. All rights reserved | Design by PLANETCARE</footer>
     </div>
+    <script src="login.js"></script> <!-- Link to your login.js file -->
 </body>
 </html>
