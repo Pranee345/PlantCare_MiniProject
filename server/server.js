@@ -84,7 +84,7 @@ app.post('/api/login', async (req, res) => {
         res.json({ message: 'Login successful', user });
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Serverers Error' });
     }
 });
 
