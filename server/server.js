@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const bcrypt = require('bcrypt'); // To hash passwords
+const bcrypt = require('bcrypt');
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -29,13 +29,14 @@ const userSchema = new mongoose.Schema({
     phoneNumber: Number,
     location: String,
     password: String,
+    type: String
 });
 
 const User = mongoose.model('User', userSchema);
 
 // Register endpoint
 app.post('/api/register', async (req, res) => {
-    const { username, email, phone, location, password } = req.body;
+    const { username, email, phone, location, password, type } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
@@ -43,7 +44,6 @@ app.post('/api/register', async (req, res) => {
             return res.status(400).json({ error: 'Email is already registered' });
         }
 
-        // Hash the password before saving
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new User({
@@ -52,6 +52,7 @@ app.post('/api/register', async (req, res) => {
             phoneNumber: phone,
             location,
             password: hashedPassword,
+            type
         });
 
         await newUser.save();
@@ -65,30 +66,26 @@ app.post('/api/register', async (req, res) => {
 
 // Login endpoint
 app.post('/api/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { role, username, password } = req.body;
 
     try {
-        // Find the user by username
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ username, type: role });
         if (!user) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
 
-        // Compare the provided password with the hashed password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ error: 'Invalid username or password' });
         }
 
-        // Successful login
         res.json({ message: 'Login successful', user });
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(500).json({ error: 'Internal Serverers Error' });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

@@ -1,6 +1,7 @@
 document.querySelector('#registerForm').addEventListener('submit', async function (e) {
     e.preventDefault(); // Prevent form submission
-    
+    const urlparams=new URLSearchParams(window.location.search);
+    const userType=urlparams.get("type");
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
@@ -51,7 +52,8 @@ document.querySelector('#registerForm').addEventListener('submit', async functio
                 email,
                 phone,
                 location,
-                password
+                password,
+                type:userType
             })
         });
 

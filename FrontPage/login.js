@@ -1,16 +1,18 @@
 document.querySelector('#login-form').addEventListener('submit', async function (e) {
     e.preventDefault(); // Prevent form submission
 
+    const role = document.querySelector('#role').value;
     const username = document.querySelector('#username').value;
     const password = document.querySelector('#password').value;
 
     try {
-        const response = await fetch('http://localhost:5002/api/login', { // Make sure the URL is correct
+        const response = await fetch('http://localhost:5002/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                role, 
                 username,
                 password
             }),
@@ -19,11 +21,11 @@ document.querySelector('#login-form').addEventListener('submit', async function 
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message); // Display success message
-            // Redirect to a different page or do something else on success
-            window.location.href = '/dashboard'; // Redirect to a dashboard or home page
+            alert(data.message); 
+            // Redirect based on role
+            window.location.href = role === 'users' ? 'Userdashboard/page.html' : 'Ragpicker/page.html';
         } else {
-            alert(data.error); // Display error message
+            alert(data.error);
         }
     } catch (error) {
         console.error('Error during login:', error);
