@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('https://via.placeholder.com/800x600') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('Images/HandsGlobe.jpg') no-repeat center center/cover;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.login-container {
+    background: linear-gradient(135deg, #ffffff, #e3f2fd, #ffebee);
+    width: 350px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+    color: #ae5e5e;
+}
+
+
+
+
+.profile-pic h2 {
+    color: #2e7d32;
+    margin-top: 10px;
+}
+
+.input-group {
+    position: relative;
+    margin: 15px 0;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #56ab2f;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.input-group select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.input-group .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1b5e20;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+}
+.profile-pic {
+    display: flex;              /* Flexbox to center contents */
+    flex-direction: column;     /* Ensures elements stack vertically */
+    align-items: center;        /* Centers child elements horizontally */
+    justify-content: center;    /* Centers child elements vertically */
+    margin-bottom: 20px;        /* Adds spacing below profile picture */
+}
+
+.profile-pic img {
+    width: 100px;               /* Fixed width */
+    height: 100px;              /* Fixed height */
+    border-radius: 50%;         /* Circular border */
+    object-fit: cover;          /* Scale the image to fill the circle */
+    object-position: center;    /* Center the image within the frame */
+    margin: 0;                  /* Ensures no extra space around the image */
+    display: block;             /* Prevents extra space issues around image */
+}
+

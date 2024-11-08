@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "Praneeth",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
