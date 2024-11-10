@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragpicker Registration</title>
+    <link rel="stylesheet" href="ragregister.css">
+    <script type="module" src="ragpicker.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="profile-pic">
+            <img src="../../Images/logo.png" alt="Profile">
+            <h2>Welcome</h2>
+        </div>
+        <div class="form-container">
+            <!-- Updated the form ID to match the JavaScript selector -->
+            <form id="ragregisterForm">
+                <div class="input-group">
+                    <input type="text" id="username" name="name" placeholder="Enter your name" required pattern="^[A-Za-z\s]{2,30}$" title="Name should only contain letters and spaces (2-30 characters)">
+                    <span class="icon">&#128100;</span>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address">
+                    <span class="icon">&#9993;</span>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="phone" name="mobile" placeholder="Mobile Number" required pattern="^[0-9]{10}$" title="Mobile number should be 10 digits">
+                    <span class="icon">&#9742;</span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" title="Password must be at least 8 characters, include letters and at least one number">
+                    <span class="icon" onclick="togglePasswordVisibility('password')">&#128065;</span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" title="Please enter the same password as above">
+                    <span class="icon" onclick="togglePasswordVisibility('confirmPassword')">&#128065;</span>
+                </div>
+                <div id="locationInfo" style="margin: 15px 0; color: #333;"></div>
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <div class="options">
+                    <label><input type="checkbox"> Remember me</label>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <footer>&copy; 2024 Portrait Login Form. All rights reserved | Design by PLANETCARE</footer>
+    </div>
+    <script>
+        function togglePasswordVisibility(id) {
+            const passwordField = document.getElementById(id);
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+
+        // Geolocation script
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        document.getElementById('latitude').value = latitude;
+                        document.getElementById('longitude').value = longitude;
+                        document.getElementById('locationInfo').innerHTML = `Latitude: ${latitude.toFixed(5)}, Longitude: ${longitude.toFixed(5)}`;
+                    },
+                    (error) => {
+                        document.getElementById('locationInfo').innerHTML = 'Location access denied. Please enable location services.';
+                    }
+                );
+            } else {
+                document.getElementById('locationInfo').innerHTML = 'Geolocation is not supported by your browser.';
+            }
+        }
+
+        // Call getLocation when the page loads
+        window.onload = getLocation;
+    </script>
+    <script src="ragpicker.js"></script>
+</body>
+</html>

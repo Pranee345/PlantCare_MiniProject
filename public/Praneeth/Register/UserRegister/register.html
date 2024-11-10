@@ -10,7 +10,7 @@
 <body>
     <div class="login-container">
         <div class="profile-pic">
-            <img src="Images/logo.png" alt="Profile">
+            <img src="../../Images/logo.png" alt="Profile">
             <h2>Welcome</h2>
         </div>
         <div class="form-container">
@@ -33,11 +33,11 @@
                 </div>
                 <div class="input-group">
                     <input type="password" id="password" placeholder="Password" required>
-                    <span class="icon">&#128274;</span>
+                    <span class="icon" onclick="togglePasswordVisibility('password')">&#128065;</span>
                 </div>
                 <div class="input-group">
                     <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                    <span class="icon">&#128274;</span>
+                    <span class="icon" onclick="togglePasswordVisibility('confirmPassword')">&#128065;</span>
                 </div>
                 <div class="options">
                     <label><input type="checkbox"> Remember me</label>
@@ -47,6 +47,16 @@
         </div>
         <footer>&copy; 2024 Portrait Login Form. All rights reserved | Design by PLANETCARE</footer>
     </div>
+    <script>
+        function togglePasswordVisibility(id){
+           const password=document.getElementById(id);
+           if(password.type=='password'){
+               password.type='text';
+           }else{
+              password.type='password';
+           }
+        }
+    </script>
     <script src="register.js"></script>
 </body>
 </html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanetCare</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome CDN for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic styling */
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #2d3a3b;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: flex-start; /* Align logo and brand to left */
+            align-items: center;
+            position: relative;
+        }
+
+        /* Logo styling */
+        .logo img {
+            width: 70px;
+           height: 70px;
+           margin-right: 1rem;
+             border-radius: 50%; 
+            animation: zoomIn 1s ease-in-out;
+        }
+
+        /* Animation for PlanetCare Logo */
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Brand Name Text - Larger font size */
+        .brand-name{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .site-name{
+            font-size: 2.5rem;
+            font-weight: bolder;
+            color: rgb(42, 142, 29);
+        }
+
+        .tagline{
+            font-size: 0.7rem;
+            font-weight: bolder;
+            color:rgb(20, 22, 20); ;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Adjust nav to the right side */
+        header nav {
+            display: flex;
+            gap: 25px; /* Increased gap between links */
+            margin-left: auto; /* This pushes the nav to the right side */
+        }
+
+        /* Change Font Style and Size for Nav Links */
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px; /* Increased font size for nav links */
+            padding: 12px 20px; /* Added padding for better spacing */
+            border-radius: 5px;
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            font-family: 'Roboto', sans-serif; /* Changed the font family */
+        }
+
+        /* Green Hover effect for nav links */
+        header nav a:hover {
+            background-color: #28a745; /* Green background on hover */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+        }
+
+        header nav a:active {
+            transform: scale(0.98); /* Slight shrinking effect on click */
+        }
+
+        /* Profile Icon Styling */
+        header .profile {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        header .profile i {
+            color: white;  /* Icon color */
+            font-size: 20px;  /* Adjust the size of the icon */
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 60px; /* Adjusted to move the dropdown lower */
+            right: 0;
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            border-radius: 8px;
+            z-index: 10;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Show dropdown when profile is clicked */
+        .profile.active + .dropdown-menu {
+            display: block;
+        }
+
+        .content {
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background-color: #2d3a3b;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Social Media Icons Styling */
+        .footer .social-icons {
+            margin-top: 10px;
+        }
+
+        .footer .social-icons a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        .footer .social-icons img {
+            width: 30px;  /* Set the size of the icons */
+            height: 30px; /* Set the size of the icons */
+            transition: transform 0.3s ease;
+        }
+
+        .footer .social-icons img:hover {
+            transform: scale(1.1); /* Slight zoom effect on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="../Images/logo.png" alt="PlanetCare Logo" style="width: 70px;height: 70px;">
+            <div class="brand-name">
+                <h1 class="site-name">PlanetCare</h1>
+                <h2 class="tagline">From Waste to Worth, Together for the Planet</h2>
+            </div> <!-- Brand name next to logo -->
+        </div>
+        <!-- Right-aligned navigation links -->
+        <nav>
+            <a href="#">Explore</a>
+            <a href="#">Sell</a>
+            <a href="#">Points</a>
+            <!-- Notification bell icon using Font Awesome -->
+            <a href="#"><i class="fas fa-bell"></i></a> <!-- Notification bell icon -->
+        </nav>
+        <div class="profile" id="profile">
+            <!-- Font Awesome Profile Icon -->
+            <i class="fas fa-user"></i> <!-- Profile icon -->
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="#">My Profile</a>
+            <a href="../index.html">Logout</a>
+        </div>
+    </header>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 PlanetCare. All Rights Reserved.</p>
+        <p>Contact us:</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/yourprofile" target="_blank">
+                <img src="images/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/yourprofile" target="_blank">
+                <img src="images/facebook.png" alt="Facebook">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('profile').addEventListener('click', function() {
+            var profileMenu = document.getElementById('dropdownMenu');
+            profileMenu.style.display = (profileMenu.style.display === 'block') ? 'none' : 'block';
+            // Toggle the active state for the profile icon to indicate the dropdown is active
+            this.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(e) {
+            var profileMenu = document.getElementById('dropdownMenu');
+            var profileIcon = document.getElementById('profile');
+            if (!profileIcon.contains(e.target)) {
+                profileMenu.style.display = 'none';
+                profileIcon.classList.remove('active');  // Remove active state if clicked outside
+            }
+        });
+    </script>
+
+</body>
+</html>

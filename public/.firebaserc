@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "plantcare-43ba1"
-  }
+  },
+  "targets": {
+    "plantcare-43ba1": {
+      "hosting": {
+        "PlantCare": [
+          "plantcare-43ba1"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

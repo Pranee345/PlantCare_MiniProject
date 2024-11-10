@@ -36,7 +36,7 @@ document.querySelector('#login-form').addEventListener('submit', async function 
 
         alert('Login successful!');
         // Redirect based on user type or role
-        window.location.href =role=='users'? 'Userdashboard/profile/page.html': 'Ragpicker/page.html'; // Or adjust based on the user's role
+        window.location.href =role=='users'? '../UserDashboard/HomePage/HomePage.html': '../RagPickerDashboard/ragHomePage.html'; // Or adjust based on the user's role
     } catch (error) {
         console.error('Error during login:', error);
         alert('Login failed: ' + error.message);

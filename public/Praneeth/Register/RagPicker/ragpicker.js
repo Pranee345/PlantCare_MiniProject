@@ -17,23 +17,26 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getFirestore(app);
 
-document.querySelector('#registerForm').addEventListener('submit', async function (e) {
+document.querySelector('#ragregisterForm').addEventListener('submit', async function (e) {
     e.preventDefault(); // Prevent form submission
 
     // Get form values
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
-    const location = document.getElementById('location').value;
+    const latitude = document.getElementById('latitude').value;
+    const longitude = document.getElementById('longitude').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Check for matching user type in URL
     const userType = new URLSearchParams(window.location.search).get("type");
 
     // Validate inputs with regex
-    const usernameRegex = /^[A-Za-z]+$/;
+    const usernameRegex = /^[A-Za-z\s]{2,30}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
 
     if (!usernameRegex.test(username)) {
         alert('Invalid username format');
@@ -48,7 +51,7 @@ document.querySelector('#registerForm').addEventListener('submit', async functio
         return;
     }
     if (!passwordRegex.test(password)) {
-        alert('Password must be 6-20 characters long, include at least 1 digit, 1 uppercase, and 1 lowercase');
+        alert('Password must be 8-20 characters long, include at least 1 digit, 1 uppercase, and 1 lowercase');
         return;
     }
     if (password !== confirmPassword) {
@@ -58,7 +61,7 @@ document.querySelector('#registerForm').addEventListener('submit', async functio
 
     try {
         // Check if the username or email already exists in Firestore
-        const usersRef = collection(database, 'users');
+        const usersRef = collection(database, 'ragpicker');
         const usernameQuery = query(usersRef, where('username', '==', username));
         const emailQuery = query(usersRef, where('email', '==', email));
 
@@ -82,19 +85,21 @@ document.querySelector('#registerForm').addEventListener('submit', async functio
         await sendEmailVerification(user);
 
         // Store data in Firestore
-        await setDoc(doc(database, 'users', user.uid), {
+        await setDoc(doc(database, 'ragpicker', user.uid), {
             username,
             email,
             phone,
-            location,
-            password,
+            latitude,
+            longitude,
             type: userType
         });
 
-        alert('Registration successful! Please check your email for verification.');
-        window.location.href = 'login.html'; // Redirect to login page
+        alert('Registration successful! Please verify your email.');
+        window.location.href = '../../login/login.html'; // Redirect to login page
+
     } catch (error) {
-        console.error('Error during registration:', error);
-        alert('An error occurred while registering. Please try again later.');
+        console.error('Error registering user:', error);
+        alert(error.message);
     }
 });
+ 

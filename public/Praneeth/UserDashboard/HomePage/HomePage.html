@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserHomePage</title>
+    <link rel="stylesheet" href="HomeStyle.css">
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                <img src="../../Images/logo.png" alt="logo">
+            </div>
+            <div class="branding">
+                <h1 class="site-name">PlanetCare</h1>
+                <h2 class="tagline">From Waste to Worth, Together for the Planet</h2>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#explore">Explore</a></li>
+                <li><a href="#sell">Sell</a></li>
+                <li><a href="#scrapImpact">Scrap Impact</a></li>
+                <li><a href="#pickuprequest">Pickup Request</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="notification-icon" onclick="toggleNotificationMenu()">
+                <i class="fas fa-bell"></i> <!-- Font Awesome bell icon -->
+                <span class="badge">3</span> <!-- Notification badge -->
+            </div>
+            <div id="notification-menu" class="notification-menu">
+                <ul>
+                    <li><a href="#notif1">New message from admin</a></li>
+                    <li><a href="#notif2">Pickup request approved</a></li>
+                    <li><a href="#notif3">Weekly report available</a></li>
+                    <li><a href="#notif4">Weekly report available</a></li>
+                </ul>
+            </div>
+            <div class="profile-icon" onclick="toggleProfileMenu()">
+                <i class="fas fa-user-circle"></i> <!-- Font Awesome user icon -->
+            </div>
+            <div id="profile-menu" class="profile-menu">
+                <ul>
+                    <li><a href="../profile/profile.html">My Profile</a></li>
+                    <li><a href="../index.html">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profile-menu');
+            menu.classList.toggle('show');
+        }
+
+        function toggleNotificationMenu() {
+            const menu = document.getElementById('notification-menu');
+            menu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', (e) => {
+            const profileMenu = document.getElementById('profile-menu');
+            const notificationMenu = document.getElementById('notification-menu');
+
+            if (!profileMenu.contains(e.target) && !e.target.closest('.profile-icon')) {
+                profileMenu.classList.remove('show');
+            }
+            if (!notificationMenu.contains(e.target) && !e.target.closest('.notification-icon')) {
+                notificationMenu.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
