@@ -26,13 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // const lastNameField = document.getElementById('last-name');
     const emailField = document.getElementById('email');
     const phoneField = document.getElementById('phone');
-    const locationField=document.getElementById('location');
     const photoUpload = document.getElementById('photo-upload');
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             const userId = user.uid;
-            const userDocRef = doc(db, 'users', userId);
+            const userDocRef = doc(db, 'ragpicker', userId);
 
             try {
                 const docSnap = await getDoc(userDocRef);
@@ -41,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     firstNameField.value = userData.username || '';
                     emailField.value = userData.email || '';
                     phoneField.value = userData.phone || '';
-                    locationField.value=userData.location|| '';
 
                     if (userData.photoURL) {
                         profileImg.src = userData.photoURL;

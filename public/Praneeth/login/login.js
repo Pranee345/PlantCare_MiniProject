@@ -27,7 +27,7 @@ document.querySelector('#login-form').addEventListener('submit', async function 
         // Sign in with Firebase Authentication
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-
+        
         // Check if email is verified
         if (!user.emailVerified) {
             alert('Please verify your email first!');
