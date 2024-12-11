@@ -36,7 +36,7 @@ document.querySelector('#ragregisterForm').addEventListener('submit', async func
     const usernameRegex = /^[A-Za-z\s]{2,30}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
     if (!usernameRegex.test(username)) {
         alert('Invalid username format');

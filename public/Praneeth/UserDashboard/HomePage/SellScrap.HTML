@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrap Prices</title>
+    <link rel="stylesheet" href="SellScrapStyle.css">
+    <style>
+        /* Inline CSS to ensure the background is black */
+        body {
+            background-color: black;
+            color: white; /* Ensure text is readable on a black background */
+        }
+    </style>
+</head>
+<body background-color="black">
+    <header>
+        <h1>Scrap Prices</h1>
+        <input type="text" placeholder="Search materials..." id="search-bar">
+        <nav>
+            <ul>
+                <li><a href="#paper">Paper</a></li>
+                <li><a href="#plastic">Plastic</a></li>
+                <li><a href="#metal">Metal</a></li>
+                <li><a href="#ewaste">E-waste</a></li>
+                <li><a href="#others">Others</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Paper Section -->
+        <section id="paper" class="category">
+            <h2 class="category-title">Paper</h2>
+            <div class="category-layout">
+                <div class="category-image-description">
+                    <img src="../../Images/newspaper.jpg" alt="Paper" class="category-image">
+                    <p class="description">Various paper materials such as newspapers, books, and magazines can be sold for recycling at competitive prices. Recycling paper helps save trees and reduce waste.</p>
+                </div>
+                <div class="items">
+                    <div class="item" onclick="selectItem(this)" data-name="Newspaper" data-price="₹11/Kg">
+                        <h3>Newspaper</h3>
+                        <p>₹11/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Books" data-price="₹11/Kg">
+                        <h3>Books</h3>
+                        <p>₹11/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Magazines" data-price="₹8/Kg">
+                        <h3>Magazines</h3>
+                        <p>₹8/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Carton" data-price="₹7/Kg">
+                        <h3>Carton</h3>
+                        <p>₹7/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Used Beverage Cartons" data-price="₹5/Kg">
+                        <h3>Used Beverage Cartons</h3>
+                        <p>₹5/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Grey Board" data-price="₹6/Kg">
+                        <h3>Grey Board</h3>
+                        <p>₹1.5/Kg</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plastic Section -->
+        <section id="plastic" class="category">
+            <h2 class="category-title">Plastic</h2>
+            <div class="category-layout">
+                <div class="category-image-description">
+                    <img src="../../Images/plastic.jpg"  alt="Plastic" class="category-image">
+                    <p class="description">Plastic waste, including bottles, jars, and mixed plastic, can be recycled into new products. Recycling plastic reduces pollution and energy consumption.</p>
+                </div>
+                <div class="items">
+                    <div class="item" onclick="selectItem(this)" data-name="Water/Oil Covers" data-price="₹12/Kg">
+                        <h3>Water/Oil Covers</h3>
+                        <p>₹3/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Mix Plastic" data-price="₹10/Kg">
+                        <h3>Mix Plastic</h3>
+                        <p>₹10/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Plastic Jar (15 L)" data-price="₹15/Kg">
+                        <h3>Plastic Jar (15 L)</h3>
+                        <p>₹15/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Polythene" data-price="₹8/Kg">
+                        <h3>Polythene</h3>
+                        <p>₹8/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Hard Plastic" data-price="₹3/Kg">
+                        <h3>Hard Plastic</h3>
+                        <p>₹3/Kg</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metal Section -->
+        <section id="metal" class="category">
+            <h2 class="category-title">Metal</h2>
+            <div class="category-layout">
+                <div class="category-image-description">
+                    <img src="../../Images/metal.jpg" alt="Metal" class="category-image">
+                    <p class="description">Recycling metal such as iron, steel, and brass saves energy and raw materials. It helps reduce landfill waste and the need for new mining.</p>
+                </div>
+                <div class="items">
+                    <div class="item" onclick="selectItem(this)" data-name="Iron" data-price="₹12/Kg">
+                        <h3>Iron</h3>
+                        <p>₹12/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Steel" data-price="₹3/Kg">
+                        <h3>Steel</h3>
+                        <p>₹3/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Tin" data-price="₹3/Kg">
+                        <h3>Tin</h3>
+                        <p>₹3/Kg</p>
+                    </div>
+                    <div class="item" onclick="selectItem(this)" data-name="Brass" data-price="₹50/Kg">
+                        <h3>Brass</h3>
+                        <p>₹50/Kg</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="store-button" onclick="storeSelectedItems()">Next</button>
+
+    <script>
+        const selectedItems = [];
+
+        function selectItem(element) {
+            const itemName = element.getAttribute("data-name");
+            const itemPrice = element.getAttribute("data-price");
+
+            if (element.classList.contains("selected")) {
+                element.classList.remove("selected");
+                const index = selectedItems.findIndex(item => item.name === itemName);
+                selectedItems.splice(index, 1);
+            } else {
+                element.classList.add("selected");
+                selectedItems.push({ name: itemName, price: itemPrice });
+            }
+        }
+
+        function storeSelectedItems() {
+            if (selectedItems.length === 0) {
+                alert("No items selected.");
+                return;
+            }
+
+            // You can handle the selected items here (e.g., send to server or console log)
+            console.log("Selected Items:", selectedItems);
+            alert(`Selected Items:\n${selectedItems.map(item => `${item.name} - ${item.price}`).join("\n")}`);
+        }
+    </script>
+</body>
+</html>

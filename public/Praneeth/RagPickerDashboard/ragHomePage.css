@@ -75,7 +75,7 @@ nav ul li a {
     font-weight: bold;
 }
 
-nav ul li a:hover, nav ul li a.active {
+nav ul li a:hover {
     background-color: #8bc34a;
     border-radius: 5px;
 }
@@ -157,89 +157,31 @@ nav ul li a:hover, nav ul li a.active {
     background-color: #f0f0f0;
 }
 
-/* Main content */
-main {
-    padding: 40px 20px;
-    text-align: center;
-    background-color: #f4f4f9;
-}
-
-main h1 {
-    color: #4caf50;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Steps container */
-.steps-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    justify-items: center;
-}
-
-/* Section styling for steps */
-section {
-    background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 400px;
-    position: relative;
-}
-
-/* Hover effect */
-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Step images */
-section img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
-    float: left;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Step content styling */
-.step-content {
-    margin-left: 100px;
-}
-
-.step-content h2 {
-    color: #4caf50;
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-}
-
-.step-content p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #666;
-}
-
-/* Responsive design for smaller screens */
-@media screen and (max-width: 768px) {
-    .steps-container {
-        grid-template-columns: 1fr;
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
-
-    section img {
-        margin: 0 auto;
-        display: block;
-        float: none;
-    }
-
-    .step-content {
-        margin-left: 0;
-        text-align: center;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
+/* Media Queries */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-right {
+        margin-top: 10px;
+    }
+}

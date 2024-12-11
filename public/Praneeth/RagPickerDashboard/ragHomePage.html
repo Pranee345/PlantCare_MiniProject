@@ -3,251 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlanetCare</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome CDN for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Basic styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        /* Header styling */
-        header {
-            background-color: #2d3a3b;
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Logo styling */
-        .logo img {
-            width: 70px;
-            height: 70px;
-            margin-right: 1rem;
-            border-radius: 50%;
-            animation: zoomIn 1s ease-in-out;
-        }
-
-        @keyframes zoomIn {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* Brand Name styling */
-        .brand-name {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .site-name {
-            font-size: 2.5rem;
-            font-weight: bolder;
-            color: rgb(42, 142, 29);
-        }
-
-        .tagline {
-            font-size: 0.7rem;
-            font-weight: bolder;
-            color: rgb(20, 22, 20);
-        }
-
-        /* Navigation styling */
-        header nav {
-            display: flex;
-            gap: 25px;
-            margin-left: auto;
-        }
-
-        header nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            padding: 12px 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        header nav a:hover {
-            background-color: #28a745;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        header nav a:active {
-            transform: scale(0.98);
-        }
-
-        /* Profile icon styling */
-        .profile {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            background-color: #ccc;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 20px;
-            cursor: pointer;
-        }
-
-        .profile i {
-            color: white;
-            font-size: 20px;
-        }
-
-        /* Dropdown menu */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 0;
-            background-color: #fff;
-            color: #333;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 150px;
-            border-radius: 8px;
-            z-index: 10;
-        }
-
-        .dropdown-menu a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #333;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Show dropdown when profile is clicked */
-        .profile.active + .dropdown-menu {
-            display: block;
-        }
-
-        /* Content styling */
-        .content {
-            padding: 40px;
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .content h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .content p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        /* Footer styling */
-        .footer {
-            background-color: #2d3a3b;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        /* Social media icons */
-        .footer .social-icons {
-            margin-top: 10px;
-        }
-
-        .footer .social-icons a {
-            margin: 0 10px;
-            display: inline-block;
-        }
-
-        .footer .social-icons img {
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s ease;
-        }
-
-        .footer .social-icons img:hover {
-            transform: scale(1.1);
-        }
-    </style>
+    <title>RagPickerHomePage</title>
+    <link rel="stylesheet" href="ragHomePage.css">
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header Section -->
     <header>
-        <div class="logo">
-            <img src="../Images/logo.png" alt="PlanetCare Logo">
-            <div class="brand-name">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../Images/logo.png" alt="logo">
+            </div>
+            <div class="branding">
                 <h1 class="site-name">PlanetCare</h1>
                 <h2 class="tagline">From Waste to Worth, Together for the Planet</h2>
             </div>
         </div>
-        <!-- Navigation links -->
         <nav>
-            <a href="#">Explore</a>
-            <a href="#">Sell</a>
-            <a href="#">Points</a>
-            <a href="#"><i class="fas fa-bell"></i></a>
+            <ul>
+                <li><a href="#explore">Explore</a></li>
+                <li><a href="#points">Points</a></li>
+                <li><a href="#scrapImpact">History</a></li>            </ul>
         </nav>
-        <!-- Profile Icon -->
-        <div class="profile" id="profile">
-            <i class="fas fa-user"></i>
-        </div>
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="ragProfile.html">My Profile</a>
-            <a href="../index.html">Logout</a>
+        <div class="header-right">
+            <div class="notification-icon" onclick="toggleNotificationMenu()">
+                <i class="fas fa-bell"></i> <!-- Font Awesome bell icon -->
+                <span class="badge">3</span> <!-- Notification badge -->
+            </div>
+            <div id="notification-menu" class="notification-menu">
+                <ul>
+                    <li><a href="#notif1">New message from admin</a></li>
+                    <li><a href="#notif2">Pickup request approved</a></li>                </ul>
+            </div>
+            <div class="profile-icon" onclick="toggleProfileMenu()">
+                <i class="fas fa-user-circle"></i> <!-- Font Awesome user icon -->
+            </div>
+            <div id="profile-menu" class="profile-menu">
+                <ul>
+                    <li><a href="ragProfile.html">My Profile</a></li>
+                    <li><a href="../index.html">Logout</a></li>
+                </ul>
+            </div>
         </div>
     </header>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2024 PlanetCare. All Rights Reserved.</p>
-        <p>Contact us:</p>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/yourprofile" target="_blank">
-                <img src="images/instagram.png" alt="Instagram">
-            </a>
-            <a href="https://www.facebook.com/yourprofile" target="_blank">
-                <img src="images/facebook.png" alt="Facebook">
-            </a>
-        </div>
-    </div>
-
     <script>
-        document.getElementById('profile').addEventListener('click', function() {
-            var profileMenu = document.getElementById('dropdownMenu');
-            profileMenu.style.display = (profileMenu.style.display === 'block') ? 'none' : 'block';
-            this.classList.toggle('active');
-        });
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profile-menu');
+            menu.classList.toggle('show');
+        }
 
-        document.addEventListener('click', function(e) {
-            var profileMenu = document.getElementById('dropdownMenu');
-            var profileIcon = document.getElementById('profile');
-            if (!profileIcon.contains(e.target)) {
-                profileMenu.style.display = 'none';
-                profileIcon.classList.remove('active');
+        function toggleNotificationMenu() {
+            const menu = document.getElementById('notification-menu');
+            menu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', (e) => {
+            const profileMenu = document.getElementById('profile-menu');
+            const notificationMenu = document.getElementById('notification-menu');
+
+            if (!profileMenu.contains(e.target) && !e.target.closest('.profile-icon')) {
+                profileMenu.classList.remove('show');
+            }
+            if (!notificationMenu.contains(e.target) && !e.target.closest('.notification-icon')) {
+                notificationMenu.classList.remove('show');
             }
         });
     </script>

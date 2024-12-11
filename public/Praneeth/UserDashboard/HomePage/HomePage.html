@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UserHomePage</title>
+    <title>PlanetCare - Dashboard</title>
     <link rel="stylesheet" href="HomeStyle.css">
-    <!-- Include Font Awesome -->
+        <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -21,27 +21,26 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#explore">Explore</a></li>
-                <li><a href="#sell">Sell</a></li>
+                <li><a href="#explore" class="active">Explore</a></li>
+                <li><a href="SellScrap.html">Sell</a></li>
                 <li><a href="#scrapImpact">Scrap Impact</a></li>
                 <li><a href="#pickuprequest">Pickup Request</a></li>
             </ul>
         </nav>
         <div class="header-right">
             <div class="notification-icon" onclick="toggleNotificationMenu()">
-                <i class="fas fa-bell"></i> <!-- Font Awesome bell icon -->
-                <span class="badge">3</span> <!-- Notification badge -->
+                <i class="fas fa-bell"></i>
+                <span class="badge">3</span>
             </div>
             <div id="notification-menu" class="notification-menu">
                 <ul>
                     <li><a href="#notif1">New message from admin</a></li>
                     <li><a href="#notif2">Pickup request approved</a></li>
                     <li><a href="#notif3">Weekly report available</a></li>
-                    <li><a href="#notif4">Weekly report available</a></li>
                 </ul>
             </div>
             <div class="profile-icon" onclick="toggleProfileMenu()">
-                <i class="fas fa-user-circle"></i> <!-- Font Awesome user icon -->
+                <i class="fas fa-user-circle"></i>
             </div>
             <div id="profile-menu" class="profile-menu">
                 <ul>
@@ -51,6 +50,41 @@
             </div>
         </div>
     </header>
+
+    <main id="explore">
+        <h1>Sell Your Scrap in 4 Easy Steps</h1>
+        <div class="steps-container">
+            <section>
+                <img src="../../Images/select.jpg" alt="Step 1: Select Scrap Items">
+                <div class="step-content">
+                    <h2>Select Scrap Items for Selling</h2>
+                    <p>We collect a variety of scrap items like newspapers, iron, electronic devices, beer bottles, and more.</p>
+                </div>
+            </section>
+            <section>
+                <img src="../../Images/date.jpg" alt="Step 2: Choose Date for Pickup">
+                <div class="step-content">
+                    <h2>Choose a Date for Scrap Pickup</h2>
+                    <p>Pick a date for our executives to collect your scrap. You can even schedule a request for the next day.</p>
+                </div>
+            </section>
+            <section>
+                <img src="../../Images/delivery.jpg" alt="Step 3: Pickup Boys Arrive">
+                <div class="step-content">
+                    <h2>Pickup Boys Will Arrive</h2>
+                    <p>Our pickup executives will visit your home and separately verify the quantity of each scrap item.</p>
+                </div>
+            </section>
+            <section>
+                <img src="../../Images/sold.jpg" alt="Step 4: Scrap Sold">
+                <div class="step-content">
+                    <h2>Scrap Sold</h2>
+                    <p>After verification, the ragpicker will collect the waste and authenticate the process with the OTP you provide, ensuring transparency.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
 
     <script>
         function toggleProfileMenu() {
