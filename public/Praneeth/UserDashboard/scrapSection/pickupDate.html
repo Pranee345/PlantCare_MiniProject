@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight and Date Selector</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> <!-- Leaflet.js -->
+    <script type="module" src="ScrapDetails.js"></script>
+    <script type="module">
+        import { handleSubmit } from './ScrapDetails.js';
+    
+        // Make the functions accessible globally
+        window.handleSubmit = handleSubmit;
+    </script>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 120vh; */
+            margin: 30px;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 40px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .container h1 {
+            font-size: 24px;
+            color: #00796b;
+            margin-bottom: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        select, input[type="date"], textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease-in-out;
+        }
+
+        select:focus, input[type="date"]:focus, textarea:focus, button:focus {
+            border-color: #00796b;
+            box-shadow: 0 0 8px rgba(0, 121, 107, 0.5);
+        }
+
+        button {
+            background-color: #00796b;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            padding: 12px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #777;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        #map {
+            height: 250px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-container button {
+            width: 48%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PickUp Details</h1>
+        
+        <!-- Form for submitting the data -->
+        <form id="location-form" onsubmit="submitForm(event)">
+        
+            <!-- Dropdown for weight -->
+            <label for="weight">Select Weight Range (in kg):</label>
+            <select id="weight" name="weight">
+                <option value="0.5 -1 kg">0.5 - 1 kg</option>
+                <option value="1-2 kg">1-2 kg</option>
+                <option value="2-5 kg">2-5 kg</option>
+                <option value="5-8 kg">5-8 kg</option>
+                <option value="8-12 kg">8-12 kg</option>
+                <option value="12-15 kg">12-15 kg</option>
+                <option value="15-25 kg">15-25 kg</option>
+                <option value="25-30 kg">25-30 kg</option>
+                <option value="more than 30 kg">More than 30 kg</option>
+            </select>
+            
+            <!-- Date Picker -->
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" min="" required>
+            
+            <!-- Location -->
+            <label for="location">Location:</label>
+            <textarea id="location" name="location" placeholder="Your address will appear here or input manually..." rows="3" required></textarea>
+
+            <!-- Buttons for getting location and submitting -->
+            <div class="btn-container">
+                <button type="button" onclick="getLocation()">Get Current Location</button>
+                <button type="submit">Submit</button>
+            </div>
+        
+        </form>
+        
+        <div id="message-container" style="display:none; margin: 20px 0; padding: 10px; border-radius: 5px;"></div>
+        
+        <!-- Map to show user's location -->
+        <div id="map"></div>
+    </div>
+    
+    <script>
+        // Set the minimum date to today's date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+    
+        // Set maximum date as 15 days from today
+        const maxDateObj = new Date();
+        maxDateObj.setDate(maxDateObj.getDate() + 15);
+        const maxDate = maxDateObj.toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('max', maxDate);
+    
+        // Get Location using OpenStreetMap (OSM) and Nominatim API
+        async function getLocation() {
+            const locationField = document.getElementById('location');
+            const mapDiv = document.getElementById('map');
+
+            if (!navigator.geolocation) {
+                locationField.value = "Geolocation is not supported by your browser.";
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                // Show map with Leaflet.js
+                const map = L.map(mapDiv).setView([lat, lng], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup('Your Location')
+                    .openPopup();
+
+                // Reverse geocode to get the human-readable address
+                const geocodeUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
+
+                try {
+                    const response = await fetch(geocodeUrl);
+                    const data = await response.json();
+                    if (data.address) {
+                        locationField.value = `${data.address.road}, ${data.address.city}, ${data.address.country}`;
+                    } else {
+                        locationField.value = "Unable to fetch address. Please enter manually.";
+                    }
+                } catch (error) {
+                    console.error("Error fetching geolocation: ", error);
+                    locationField.value = "Error fetching address. Please enter manually.";
+                }
+            }, () => {
+                locationField.value = "Unable to retrieve location. Please enter manually.";
+            });
+        }
+
+        // Handle form submission
+        function submitForm(event) {
+            event.preventDefault(); // Prevent form from reloading the page
+            handleSubmit(event); // Call the handleSubmit function
+        }
+    </script>
+</body>
+</html>

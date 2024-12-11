@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scrap Prices</title>
     <link rel="stylesheet" href="SellScrapStyle.css">
-    <style>
-        /* Inline CSS to ensure the background is black */
-        body {
-            background-color: black;
-            color: white; /* Ensure text is readable on a black background */
-        }
-    </style>
-</head>
+    <script type="module">
+        import { selectItem, navigateToNext } from './ScrapDetails.js';
+    
+        // Make the functions accessible globally
+        window.selectItem = selectItem;
+        window.navigateToNext = navigateToNext;
+    </script>
+ </head>
 <body background-color="black">
     <header>
         <h1>Scrap Prices</h1>
@@ -129,35 +129,6 @@
         </section>
     </main>
 
-    <button id="store-button" onclick="storeSelectedItems()">Next</button>
-
-    <script>
-        const selectedItems = [];
-
-        function selectItem(element) {
-            const itemName = element.getAttribute("data-name");
-            const itemPrice = element.getAttribute("data-price");
-
-            if (element.classList.contains("selected")) {
-                element.classList.remove("selected");
-                const index = selectedItems.findIndex(item => item.name === itemName);
-                selectedItems.splice(index, 1);
-            } else {
-                element.classList.add("selected");
-                selectedItems.push({ name: itemName, price: itemPrice });
-            }
-        }
-
-        function storeSelectedItems() {
-            if (selectedItems.length === 0) {
-                alert("No items selected.");
-                return;
-            }
-
-            // You can handle the selected items here (e.g., send to server or console log)
-            console.log("Selected Items:", selectedItems);
-            alert(`Selected Items:\n${selectedItems.map(item => `${item.name} - ${item.price}`).join("\n")}`);
-        }
-    </script>
+    <button id="store-button" onclick="navigateToNext()">Next</button>  
 </body>
 </html>
