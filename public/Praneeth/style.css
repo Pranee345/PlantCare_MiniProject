@@ -161,9 +161,10 @@ nav ul li a:hover {
 
 .about-points {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 2rem;
     align-items: center;
+    justify-content: space-evenly;
     max-width: 800px;
     margin: 0 auto;
 }

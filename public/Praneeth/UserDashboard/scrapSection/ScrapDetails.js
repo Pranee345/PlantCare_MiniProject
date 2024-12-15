@@ -1,7 +1,9 @@
-// Firestore configuration
+// Firestore and Auth configuration
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
+// Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyC7DPfCAl03P0mDaW400cnwQ_XzhIutuFo",
     authDomain: "plantcare-43ba1.firebaseapp.com",
@@ -11,12 +13,23 @@ const firebaseConfig = {
     appId: "1:961408963454:web:869bc3c1ef71966d02192f"
 };
 
-// Initialize Firebase and Firestore
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 // Array to store selected items
 let selectedItems = [];
+
+// Store the current signed-in user's UID
+let currentUserId = null;
+
+// Monitor user authentication status
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUserId = user.uid; // Get the UID of the signed-in user
+    }
+});
 
 // Function to handle item selection
 function selectItem(element) {
@@ -28,17 +41,15 @@ function selectItem(element) {
         category
     };
 
-    // Check if the item is already selected
     const existingItemIndex = selectedItems.findIndex(i => i.name === name && i.category === category);
 
     if (existingItemIndex === -1) {
         selectedItems.push(item);
-        element.style.backgroundColor = "#d1e7dd"; // Change background color to indicate selection
+        element.style.backgroundColor = "#d1e7dd";
         element.style.border = "2px solid #0f5132";
     } else {
-        // Remove the item if already selected (toggle behavior)
         selectedItems.splice(existingItemIndex, 1);
-        element.style.backgroundColor = ""; // Reset background color
+        element.style.backgroundColor = "";
         element.style.border = "";
     }
 }
@@ -57,7 +68,7 @@ function navigateToNext() {
 async function handleSubmit() {
     const weight = document.getElementById('weight').value;
     const date = document.getElementById('date').value;
-    const location=document.getElementById('location').value;
+    const location = document.getElementById('location').value;
 
     if (!date || !weight || !location) {
         displayMessage("Please fill in all required fields.", "error");
@@ -70,9 +81,15 @@ async function handleSubmit() {
         return;
     }
 
+    if (!currentUserId) {
+        displayMessage("User is not signed in. Please log in first.", "error");
+        return;
+    }
+
     try {
-        // Add data to Firestore
+        // Add data to Firestore with userId
         await addDoc(collection(db, 'scrap_orders'), {
+            userId: currentUserId, // Store the user ID
             items,  // Save selected items
             weight, // Save weight input
             date,   // Save date input

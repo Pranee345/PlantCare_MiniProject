@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Owner Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
+        }
+
+        .registration-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="file"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn,
+        .detect-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px 15px;
+            background: #007bff;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .detect-btn {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h2>House Owner Registration</h2>
+        <form action="/register" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">House Address</label>
+                <input type="text" id="address" name="address" placeholder="Full address of the property" required>
+            </div>
+
+            <div class="form-group">
+                <label for="house-image">House Image</label>
+                <input type="file" id="house-image" name="house-image" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Manual Location (optional)</label>
+                <input type="text" id="location" name="location" placeholder="City, Area">
+            </div>
+
+            <div class="form-group">
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" name="latitude" placeholder="Latitude will auto-fill">
+            </div>
+
+            <div class="form-group">
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" name="longitude" placeholder="Longitude will auto-fill">
+            </div>
+
+            <!-- Button to Detect Location -->
+            <button type="button" class="detect-btn" onclick="detectLocation()">Detect My Location</button>
+
+            <div class="form-group">
+                <label for="room-type">Room Type</label>
+                <select id="room-type" name="roomType" required>
+                    <option value="">Select Room Type</option>
+                    <option value="1bhk">1 BHK</option>
+                    <option value="2bhk">2 BHK</option>
+                    <option value="3bhk">3 BHK</option>
+                    <option value="4bhk">4 BHK</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+    </div>
+<script>
+    function detectLocation() {
+        if (navigator.geolocation) {
+            let readings = [];
+            const numReadings = 5;
+    
+            function calculateAverage() {
+                const latSum = readings.reduce((sum, r) => sum + r.latitude, 0);
+                const lngSum = readings.reduce((sum, r) => sum + r.longitude, 0);
+    
+                const avgLat = (latSum / readings.length).toFixed(14);
+                const avgLng = (lngSum / readings.length).toFixed(14);
+    
+                document.getElementById('latitude').value = avgLat;
+                document.getElementById('longitude').value = avgLng;
+    
+                alert(`Averaged Location:\nLatitude: ${avgLat}, Longitude: ${avgLng}`);
+            }
+    
+            function addReading(position) {
+                readings.push({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                });
+    
+                if (readings.length === numReadings) {
+                    calculateAverage();
+                }
+            }
+    
+            for (let i = 0; i < numReadings; i++) {
+                navigator.geolocation.getCurrentPosition(
+                    addReading,
+                    (error) => console.error('Error fetching location:', error),
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                );
+            }
+        } else {
+            alert('Geolocation is not supported by your browser');
+        }
+    }
+  </script>  
+
+</body>
+</html>

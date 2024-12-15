@@ -1,19 +1,49 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const { onDocumentCreated } = require("firebase-functions/v2/firestore");
+const admin = require("firebase-admin");
+const nodemailer = require("nodemailer");
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+admin.initializeApp();
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "desaimansion456@gmail.com",
+        pass: "csbs rxxh ohks mspx",
+    },
+});
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+exports.notifyRagpickers = onDocumentCreated("scrap_orders/{orderId}", async (event) => {
+    const orderData = event.data; // Newly created document data
+
+    try {
+        const ragpickersSnapshot = await admin.firestore().collection("ragpickers").get();
+
+        if (ragpickersSnapshot.empty) {
+            console.log("No ragpickers found.");
+            return null;
+        }
+
+        const ragpickerEmails = ragpickersSnapshot.docs.map(doc => doc.data().email);
+
+        const mailOptions = {
+            from: "desaimansion456@gmail.com",
+            to: ragpickerEmails,
+            subject: "New Scrap Pickup Request",
+            text: `New request details:
+                Weight: ${orderData.weight} kg
+                Date: ${orderData.date}
+                Location: ${orderData.location}`,
+            html: `<p>New request details:</p>
+                <p><strong>Weight:</strong> ${orderData.weight} kg</p>
+                <p><strong>Date:</strong> ${orderData.date}</p>
+                <p><strong>Location:</strong> ${orderData.location}</p>`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log("Emails sent successfully.");
+        return null;
+    } catch (error) {
+        console.error("Error sending emails:", error);
+        return null;
+    }
+});
