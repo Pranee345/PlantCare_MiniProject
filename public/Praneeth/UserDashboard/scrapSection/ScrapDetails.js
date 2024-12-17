@@ -1,8 +1,9 @@
+//ScrapDetails.js content
+
 // Firestore and Auth configuration
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyC7DPfCAl03P0mDaW400cnwQ_XzhIutuFo",
@@ -18,9 +19,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Array to store selected items
-let selectedItems = [];
-
 // Store the current signed-in user's UID
 let currentUserId = null;
 
@@ -32,6 +30,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // Function to handle item selection
+let selectedItems = [];
 function selectItem(element) {
     const name = element.getAttribute('data-name');
     const category = element.closest('.category').querySelector('.category-title').innerText;
@@ -88,7 +87,7 @@ async function handleSubmit() {
 
     try {
         // Add data to Firestore with userId
-        await addDoc(collection(db, 'scrap_orders'), {
+        const docRef = await addDoc(collection(db, 'scrap_orders'), {
             userId: currentUserId, // Store the user ID
             items,  // Save selected items
             weight, // Save weight input
@@ -97,11 +96,12 @@ async function handleSubmit() {
             timestamp: new Date() // Save timestamp
         });
 
+        // Trigger the email notification to ragpickers
         displayMessage("Order has been successfully submitted.", "success");
         localStorage.removeItem('selectedItems'); // Clear selected items
         setTimeout(() => {
             window.location.href = '../HomePage/HomePage.html'; // Redirect to a success page
-        }, 2000);
+        }, 4000);
     } catch (error) {
         console.error("Error adding document: ", error);
         displayMessage("Failed to submit the order. Please try again.", "error");

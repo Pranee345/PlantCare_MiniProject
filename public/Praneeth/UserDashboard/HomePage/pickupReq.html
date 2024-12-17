@@ -127,8 +127,33 @@
     <div id="message-container"></div>
     <div id="orders-container"></div>
     
+
+    <script>
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profile-menu');
+            menu.classList.toggle('show');
+        }
+
+        function toggleNotificationMenu() {
+            const menu = document.getElementById('notification-menu');
+            menu.classList.toggle('show');
+        }
+
+        document.addEventListener('click', (e) => {
+            const profileMenu = document.getElementById('profile-menu');
+            const notificationMenu = document.getElementById('notification-menu');
+
+            if (!profileMenu.contains(e.target) && !e.target.closest('.profile-icon')) {
+                profileMenu.classList.remove('show');
+            }
+            if (!notificationMenu.contains(e.target) && !e.target.closest('.notification-icon')) {
+                notificationMenu.classList.remove('show');
+            }
+        });
+    </script>
     <script type="module">
         // Get all the nav links
+
         const navLinks = document.querySelectorAll('.nav-link');
         
         // Function to remove active class from all links
